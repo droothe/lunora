@@ -222,7 +222,7 @@ function CRM() {
       <Title s="Müşteri CRM" t="Müşteriler" />
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {customers.map((list) => {
-          const c = list[0];
+          const c = list[0]!;
           const spent = list.filter((a) => a.status !== "İptal").reduce((s, a) => s + a.total, 0);
           return (
             <div key={c.phone} className="rounded-2xl border bg-card p-5 shadow-soft">
