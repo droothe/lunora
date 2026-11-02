@@ -141,14 +141,11 @@ export function useSalon() {
 }
 
 export const tl = (n: number) => "₺" + n.toLocaleString("tr-TR");
+const WORK = Object.values(import.meta.glob("@/assets/work/*.jpg", { eager: true, import: "default" })) as string[];
+const CATS = ["Balyaj", "Sarı Tonlar", "Kaynak", "Kesim", "Balyaj", "Sarı Tonlar"];
 export const GALLERY = [
-  { src: hero, cat: "Balyaj" },
-  { src: blonde, cat: "Sarı Tonlar" },
-  { src: salon, cat: "Kesim" },
+  ...WORK.slice(0, 22).map((src, i) => ({ src, cat: CATS[i % CATS.length] })),
   { src: bride, cat: "Gelin" },
-  { src: hero, cat: "Kaynak" },
-  { src: blonde, cat: "Balyaj" },
-  { src: bride, cat: "Gelin" },
-  { src: salon, cat: "Kesim" },
+  { src: hero, cat: "Gelin" },
 ];
 export const IMAGES = { hero, blonde, bride, salon };
