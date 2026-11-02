@@ -113,8 +113,8 @@ function Hero() {
           <div className="grid grid-cols-5 gap-4">
             <img src={IMAGES.hero} alt="Balyaj saç dönüşümü" width={1024} height={1280} className="col-span-3 aspect-[4/5] w-full rounded-[2rem] object-cover shadow-lift" />
             <div className="col-span-2 flex flex-col gap-4 pt-16">
-              <img src={GALLERY[1].src} alt="Doğal sarı tonlar" className="aspect-[3/4] w-full rounded-[1.5rem] object-cover shadow-soft" />
-              <img src={GALLERY[11].src} alt="Sarı dalgalı saç" className="aspect-[3/4] w-full rounded-[1.5rem] object-cover shadow-soft" />
+              <img src={GALLERY[1]!.src} alt="Doğal sarı tonlar" className="aspect-[3/4] w-full rounded-[1.5rem] object-cover shadow-soft" />
+              <img src={GALLERY[11]!.src} alt="Sarı dalgalı saç" className="aspect-[3/4] w-full rounded-[1.5rem] object-cover shadow-soft" />
             </div>
           </div>
           <div className="glass absolute bottom-6 left-4 rounded-2xl border px-5 py-4 shadow-soft">
@@ -185,9 +185,9 @@ function Services() {
 
 function Expertise() {
   const items = [
-    ["Master of Balyage", "Işığın saçta nasıl kırıldığını bilen el işçiliği; yumuşak, doğal ve çok boyutlu geçişler.", GALLERY[4].src],
-    ["Blonde Specialist", "Natural & blonde: sıcak bal tonlarından buz sarısına, saç sağlığını koruyan dönüşümler.", GALLERY[13].src],
-    ["Cut & Extension Expert", "Yüz hattına özel kesimler ve görünmez kaynak teknikleriyle hacim ve uzunluk.", GALLERY[9].src],
+    ["Master of Balyage", "Işığın saçta nasıl kırıldığını bilen el işçiliği; yumuşak, doğal ve çok boyutlu geçişler.", GALLERY[4]!.src],
+    ["Blonde Specialist", "Natural & blonde: sıcak bal tonlarından buz sarısına, saç sağlığını koruyan dönüşümler.", GALLERY[13]!.src],
+    ["Cut & Extension Expert", "Yüz hattına özel kesimler ve görünmez kaynak teknikleriyle hacim ve uzunluk.", GALLERY[9]!.src],
   ] as const;
   return (
     <section id="uzmanlik" className="scroll-mt-24 bg-secondary py-28">
@@ -253,7 +253,7 @@ function Gallery() {
       {idx !== null && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-foreground/80 p-4 backdrop-blur" onClick={() => setIdx(null)}>
           <button aria-label="Önceki" className="absolute left-4 rounded-full bg-card p-3" onClick={(e) => { e.stopPropagation(); setIdx((idx - 1 + list.length) % list.length); }}><ChevronLeft className="h-5 w-5" /></button>
-          <img src={list[idx].src} alt="" className="fade-up max-h-[85vh] rounded-2xl object-contain" />
+          <img src={list[idx]!.src} alt="" className="fade-up max-h-[85vh] rounded-2xl object-contain" />
           <button aria-label="Sonraki" className="absolute right-4 rounded-full bg-card p-3" onClick={(e) => { e.stopPropagation(); setIdx((idx + 1) % list.length); }}><ChevronRight className="h-5 w-5" /></button>
         </div>
       )}
@@ -299,8 +299,8 @@ function Reviews() {
     <section className="mx-auto max-w-4xl px-5 py-28 text-center">
       <p className="eyebrow">Müşteri Yorumları</p>
       <div className="mt-6 flex justify-center gap-1 text-accent">{Array.from({ length: 5 }).map((_, k) => <Star key={k} className="h-4 w-4 fill-current" />)}</div>
-      <blockquote key={i} className="fade-up mt-8 font-serif text-3xl leading-snug sm:text-4xl">“{reviews[i][1]}”</blockquote>
-      <p className="mt-6 text-xs uppercase tracking-[0.25em] text-muted-foreground">{reviews[i][0]}</p>
+      <blockquote key={i} className="fade-up mt-8 font-serif text-3xl leading-snug sm:text-4xl">“{reviews[i]![1]}”</blockquote>
+      <p className="mt-6 text-xs uppercase tracking-[0.25em] text-muted-foreground">{reviews[i]![0]}</p>
       <div className="mt-8 flex justify-center gap-2">
         {reviews.map((_, k) => <button key={k} aria-label={`Yorum ${k + 1}`} onClick={() => setI(k)} className={`h-1.5 rounded-full transition-all ${k === i ? "w-8 bg-primary" : "w-1.5 bg-border"}`} />)}
       </div>
