@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, MapPin, Clock, Phone, ArrowRight, Star, ShieldCheck, ChevronLeft, ChevronRight, Instagram } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { SalonModal } from "@/components/site/SalonModal";
 import { useSalon, CATEGORIES, GALLERY, IMAGES, tl } from "@/lib/salon-store";
 
 export const Route = createFileRoute("/")({
@@ -55,11 +57,12 @@ function Header() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const f = () => setScrolled(window.scrollY > 20);
+    f();
     window.addEventListener("scroll", f);
     return () => window.removeEventListener("scroll", f);
   }, []);
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all ${scrolled ? "glass border-b py-3" : "py-5"}`}>
+    <header className={`fixed inset-x-0 top-0 z-50 transition-all ${scrolled ? "glass border-b py-3" : "border-b bg-background/95 py-4"}`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 lg:px-10">
         <Logo />
         <nav className="hidden gap-8 lg:flex">
@@ -68,21 +71,17 @@ function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <button onClick={() => openBooking()} className="hidden rounded-full bg-accent px-5 py-2.5 text-xs uppercase tracking-[0.15em] text-accent-foreground transition hover:shadow-soft sm:block">Hemen Randevu Al</button>
-          <button aria-label="Menü" onClick={() => setOpen(true)} className="rounded-full border p-2.5 lg:hidden"><Menu className="h-4 w-4" /></button>
+          <Button variant="editorial" size="auto" onClick={() => openBooking()} className="hidden rounded-full bg-accent px-5 py-2.5 text-xs uppercase tracking-[0.15em] text-accent-foreground transition hover:shadow-soft sm:block">Hemen Randevu Al</Button>
+          <Button variant="editorial" size="auto" aria-label="Menü" onClick={() => setOpen(true)} className="rounded-full border p-2.5 lg:hidden"><Menu className="h-4 w-4" /></Button>
         </div>
       </div>
-      {open && (
-        <div className="fixed inset-0 z-50 bg-foreground/20 backdrop-blur-sm lg:hidden" onClick={() => setOpen(false)}>
-          <div className="fade-up ml-auto flex h-full w-4/5 max-w-sm flex-col bg-background p-8" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center justify-between"><Logo /><button aria-label="Kapat" onClick={() => setOpen(false)}><X className="h-5 w-5" /></button></div>
-            <nav className="mt-12 flex flex-col gap-6">
-              {NAV.map(([l, h]) => <a key={h} href={`#${h}`} onClick={() => setOpen(false)} className="font-serif text-3xl">{l}</a>)}
-            </nav>
-            <button onClick={() => { setOpen(false); openBooking(); }} className="mt-auto rounded-full bg-accent py-4 text-xs uppercase tracking-[0.2em] text-accent-foreground">Hemen Randevu Al</button>
-          </div>
-        </div>
-      )}
+      <SalonModal open={open} onClose={() => setOpen(false)} title="Menü" className="left-auto right-0 top-0 h-dvh max-h-dvh w-4/5 max-w-sm translate-x-0 translate-y-0 rounded-none bg-background p-8 lg:hidden">
+        <Logo />
+        <nav className="mt-12 flex flex-col gap-6">
+          {NAV.map(([l, h]) => <a key={h} href={`#${h}`} onClick={() => setOpen(false)} className="font-serif text-3xl">{l}</a>)}
+        </nav>
+        <Button variant="editorial" size="auto" onClick={() => { setOpen(false); openBooking(); }} className="mt-auto rounded-full bg-accent py-4 text-xs uppercase text-accent-foreground">Hemen Randevu Al</Button>
+      </SalonModal>
     </header>
   );
 }
@@ -90,36 +89,18 @@ function Header() {
 function Hero() {
   const { openBooking } = useSalon();
   return (
-    <section className="relative overflow-hidden pt-28 lg:pt-32">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 pb-16 lg:grid-cols-12 lg:px-10">
-        <div className="fade-up lg:col-span-6">
-          <span className="inline-flex items-center gap-2 rounded-full border bg-card/60 px-4 py-2 text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-            <MapPin className="h-3 w-3 text-accent" /> Atakent, Atakum - Samsun
-          </span>
-          <h1 className="mt-8 text-6xl leading-[0.95] sm:text-7xl lg:text-8xl">
-            Güzelliğinizi <em className="text-accent">Sanata</em> Dönüştürüyoruz.
-          </h1>
-          <p className="mt-8 max-w-md text-base leading-relaxed text-muted-foreground">
-            Samsun Atakum'un seçkin salonunda kişiye özel balyaj, doğal sarı tonlar, profesyonel kesim ve ayrıcalıklı güzellik deneyimi.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <button onClick={() => openBooking()} className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 text-xs uppercase tracking-[0.18em] text-primary-foreground transition hover:shadow-lift">
-              Hemen Randevu Al <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-            </button>
-            <a href="#hizmetler" className="rounded-full border px-7 py-4 text-xs uppercase tracking-[0.18em] transition hover:bg-card">Hizmetlerimizi Keşfedin</a>
-          </div>
-        </div>
-        <div className="relative lg:col-span-6">
-          <div className="grid grid-cols-5 gap-4">
-            <img src={IMAGES.hero} alt="Balyaj saç dönüşümü" width={1024} height={1280} className="col-span-3 aspect-[4/5] w-full rounded-[2rem] object-cover shadow-lift" />
-            <div className="col-span-2 flex flex-col gap-4 pt-16">
-              <img src={GALLERY[1]!.src} alt="Doğal sarı tonlar" className="aspect-[3/4] w-full rounded-[1.5rem] object-cover shadow-soft" />
-              <img src={GALLERY[11]!.src} alt="Sarı dalgalı saç" className="aspect-[3/4] w-full rounded-[1.5rem] object-cover shadow-soft" />
-            </div>
-          </div>
-          <div className="glass absolute bottom-6 left-4 rounded-2xl border px-5 py-4 shadow-soft">
-            <p className="eyebrow">Signature</p>
-            <p className="font-serif text-xl">Master of Balyage</p>
+    <section className="salon-hero relative isolate overflow-hidden">
+      <img src={GALLERY[4]?.src ?? IMAGES.hero} alt="HAIRPORT saç renklendirme çalışması" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" fetchPriority="high" />
+      <div className="hero-shade absolute inset-0 -z-10" />
+      <div className="mx-auto flex h-full max-w-7xl items-end px-5 pb-10 pt-28 lg:px-10 lg:pb-14">
+        <div className="fade-up max-w-2xl text-hero-foreground">
+          <p className="mb-5 flex items-center gap-2 text-xs uppercase"><MapPin className="h-3 w-3" /> Atakent, Atakum — Samsun</p>
+          <h1 className="text-5xl leading-none sm:text-7xl lg:text-8xl">HAIRPORT <span className="mt-2 block text-3xl italic sm:text-4xl">Coiffure by Pınar Öztunç</span></h1>
+          <p className="mt-5 font-serif text-2xl sm:text-3xl">Güzelliğinizi <em>Sanata</em> Dönüştürüyoruz.</p>
+          <p className="mt-4 max-w-lg text-sm leading-relaxed text-hero-foreground/90">Samsun Atakum'un seçkin salonunda kişiye özel balyaj, doğal sarı tonlar, profesyonel kesim ve ayrıcalıklı güzellik deneyimi.</p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Button variant="editorial" size="auto" onClick={() => openBooking()} className="group rounded-full bg-accent px-6 py-3 text-xs uppercase text-accent-foreground">Hemen Randevu Al <ArrowRight className="transition group-hover:translate-x-1" /></Button>
+            <Button asChild variant="editorial" size="auto" className="rounded-full border border-hero-foreground/50 px-6 py-3 text-xs text-hero-foreground"><a href="#hizmetler">Hizmetlerimizi Keşfedin</a></Button>
           </div>
         </div>
       </div>
@@ -157,7 +138,7 @@ function Services() {
       <SectionHead eyebrow="Hizmet Menüsü" title="Ritüeller & Hizmetler" />
       <div className="-mx-5 mb-10 flex gap-2 overflow-x-auto px-5 pb-2 sm:justify-center">
         {CATEGORIES.map((c) => (
-          <button key={c} onClick={() => setCat(c)} className={`whitespace-nowrap rounded-full border px-5 py-2 text-xs transition ${cat === c ? "border-primary bg-primary text-primary-foreground" : "hover:border-accent"}`}>{c}</button>
+          <Button variant="editorial" size="auto" key={c} onClick={() => setCat(c)} className={`whitespace-nowrap rounded-full border px-5 py-2 text-xs transition ${cat === c ? "border-primary bg-primary text-primary-foreground" : "hover:border-accent"}`}>{c}</Button>
         ))}
       </div>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -173,7 +154,7 @@ function Services() {
                   <p className="text-xs text-muted-foreground"><Clock className="mr-1 inline h-3 w-3" />{s.duration} dk</p>
                   <p className="font-serif text-xl">{tl(s.price)}<span className="text-xs text-muted-foreground"> 'den</span></p>
                 </div>
-                <button onClick={() => openBooking({ serviceIds: [s.id] })} className="rounded-full bg-accent px-4 py-2 text-xs text-accent-foreground transition hover:bg-primary hover:text-primary-foreground">Randevu Seç</button>
+                <Button variant="editorial" size="auto" onClick={() => openBooking({ serviceIds: [s.id] })} className="rounded-full bg-accent px-4 py-2 text-xs text-accent-foreground transition hover:bg-primary hover:text-primary-foreground">Randevu Seç</Button>
               </div>
             </div>
           </article>
@@ -185,9 +166,9 @@ function Services() {
 
 function Expertise() {
   const items = [
-    ["Master of Balyage", "Işığın saçta nasıl kırıldığını bilen el işçiliği; yumuşak, doğal ve çok boyutlu geçişler.", GALLERY[4]!.src],
-    ["Blonde Specialist", "Natural & blonde: sıcak bal tonlarından buz sarısına, saç sağlığını koruyan dönüşümler.", GALLERY[13]!.src],
-    ["Cut & Extension Expert", "Yüz hattına özel kesimler ve görünmez kaynak teknikleriyle hacim ve uzunluk.", GALLERY[9]!.src],
+    ["Master of Balyage", "Işığın saçta nasıl kırıldığını bilen el işçiliği; yumuşak, doğal ve çok boyutlu geçişler.", GALLERY[4]?.src ?? IMAGES.hero],
+    ["Blonde Specialist", "Natural & blonde: sıcak bal tonlarından buz sarısına, saç sağlığını koruyan dönüşümler.", GALLERY[13]?.src ?? IMAGES.blonde],
+    ["Cut & Extension Expert", "Yüz hattına özel kesimler ve görünmez kaynak teknikleriyle hacim ve uzunluk.", GALLERY[9]?.src ?? IMAGES.hero],
   ] as const;
   return (
     <section id="uzmanlik" className="scroll-mt-24 bg-secondary py-28">
@@ -212,9 +193,9 @@ function Private() {
   const { openBooking } = useSalon();
   return (
     <section className="mx-auto max-w-7xl px-5 py-28 lg:px-10">
-      <div className="grid overflow-hidden rounded-[2rem] border bg-card shadow-soft lg:grid-cols-2">
-        <img src={IMAGES.salon} alt="Özel bölüm" loading="lazy" className="h-full min-h-72 w-full object-cover" />
-        <div className="flex flex-col justify-center p-10 lg:p-16">
+      <div className="grid items-center gap-8 lg:grid-cols-2">
+        <img src={IMAGES.salon} alt="Özel bölüm" loading="lazy" className="aspect-[4/3] w-full rounded-2xl object-cover" />
+        <div className="flex flex-col justify-center py-6 lg:px-8">
           <p className="eyebrow">🧕 Özel Tesettür Bölümü</p>
           <h2 className="mt-4 text-5xl leading-tight">Size Özel, Size Ait Bir Güzellik Deneyimi.</h2>
           <p className="mt-6 text-muted-foreground">Özel tesettür bölümümüzde, tamamen size ayrılmış, konforlu ve mahremiyet odaklı bir ortamda güzellik hizmetlerimizi deneyimleyin.</p>
@@ -223,7 +204,7 @@ function Private() {
               <li key={x} className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-accent" />{x}</li>
             ))}
           </ul>
-          <button onClick={() => openBooking({ privateSection: true })} className="mt-10 self-start rounded-full bg-primary px-7 py-4 text-xs uppercase tracking-[0.18em] text-primary-foreground">Özel Bölüm İçin Randevu</button>
+          <Button variant="editorial" size="auto" onClick={() => openBooking({ privateSection: true })} className="mt-10 self-start rounded-full bg-primary px-7 py-4 text-xs uppercase tracking-[0.18em] text-primary-foreground">Özel Bölüm İçin Randevu</Button>
         </div>
       </div>
     </section>
@@ -240,23 +221,26 @@ function Gallery() {
       <SectionHead eyebrow="Portfolyo" title="Dönüşüm Galerisi" />
       <div className="-mx-5 mb-10 flex gap-2 overflow-x-auto px-5 sm:justify-center">
         {cats.map((c) => (
-          <button key={c} onClick={() => setCat(c)} className={`rounded-full border px-5 py-2 text-xs transition ${cat === c ? "border-primary bg-primary text-primary-foreground" : "hover:border-accent"}`}>{c}</button>
+          <Button variant="editorial" size="auto" key={c} onClick={() => setCat(c)} className={`rounded-full border px-5 py-2 text-xs transition ${cat === c ? "border-primary bg-primary text-primary-foreground" : "hover:border-accent"}`}>{c}</Button>
         ))}
       </div>
       <div className="columns-2 gap-4 md:columns-3 lg:columns-4">
         {list.map((g, i) => (
-          <button key={g.src + i} onClick={() => setIdx(i)} className="group mb-4 block w-full overflow-hidden rounded-2xl">
+          <Button variant="editorial" size="auto" key={g.src + i} aria-label={`${g.cat} çalışması ${i + 1}`} onClick={() => setIdx(i)} className="group mb-4 block w-full overflow-hidden rounded-2xl">
             <img src={g.src} alt={g.cat} loading="lazy" className={`w-full object-cover transition duration-700 group-hover:scale-105 ${i % 3 === 1 ? "aspect-[3/4]" : "aspect-[4/5]"}`} />
-          </button>
+          </Button>
         ))}
       </div>
-      {idx !== null && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-foreground/80 p-4 backdrop-blur" onClick={() => setIdx(null)}>
-          <button aria-label="Önceki" className="absolute left-4 rounded-full bg-card p-3" onClick={(e) => { e.stopPropagation(); setIdx((idx - 1 + list.length) % list.length); }}><ChevronLeft className="h-5 w-5" /></button>
-          <img src={list[idx]!.src} alt="" className="fade-up max-h-[85vh] rounded-2xl object-contain" />
-          <button aria-label="Sonraki" className="absolute right-4 rounded-full bg-card p-3" onClick={(e) => { e.stopPropagation(); setIdx((idx + 1) % list.length); }}><ChevronRight className="h-5 w-5" /></button>
-        </div>
-      )}
+      <SalonModal open={idx !== null} onClose={() => setIdx(null)} title="Dönüşüm Galerisi" className="max-w-5xl bg-background p-4 pt-14">
+        {idx !== null && list[idx] && <>
+          <img src={list[idx]?.src} alt={list[idx]?.cat} className="max-h-[72dvh] min-h-0 w-full object-contain" />
+          <div className="mt-4 flex items-center justify-between">
+            <Button variant="outline" size="icon" aria-label="Önceki" onClick={() => setIdx((idx - 1 + list.length) % list.length)}><ChevronLeft /></Button>
+            <p className="text-sm">{list[idx]?.cat} · {idx + 1} / {list.length}</p>
+            <Button variant="outline" size="icon" aria-label="Sonraki" onClick={() => setIdx((idx + 1) % list.length)}><ChevronRight /></Button>
+          </div>
+        </>}
+      </SalonModal>
     </section>
   );
 }
@@ -299,10 +283,10 @@ function Reviews() {
     <section className="mx-auto max-w-4xl px-5 py-28 text-center">
       <p className="eyebrow">Müşteri Yorumları</p>
       <div className="mt-6 flex justify-center gap-1 text-accent">{Array.from({ length: 5 }).map((_, k) => <Star key={k} className="h-4 w-4 fill-current" />)}</div>
-      <blockquote key={i} className="fade-up mt-8 font-serif text-3xl leading-snug sm:text-4xl">“{reviews[i]![1]}”</blockquote>
-      <p className="mt-6 text-xs uppercase tracking-[0.25em] text-muted-foreground">{reviews[i]![0]}</p>
+      <blockquote key={i} className="fade-up mt-8 font-serif text-3xl leading-snug sm:text-4xl">“{reviews[i]?.[1]}”</blockquote>
+      <p className="mt-6 text-xs uppercase tracking-[0.25em] text-muted-foreground">{reviews[i]?.[0]}</p>
       <div className="mt-8 flex justify-center gap-2">
-        {reviews.map((_, k) => <button key={k} aria-label={`Yorum ${k + 1}`} onClick={() => setI(k)} className={`h-1.5 rounded-full transition-all ${k === i ? "w-8 bg-primary" : "w-1.5 bg-border"}`} />)}
+        {reviews.map((_, k) => <Button variant="editorial" size="auto" key={k} aria-label={`Yorum ${k + 1}`} onClick={() => setI(k)} className={`h-1.5 rounded-full transition-all ${k === i ? "w-8 bg-primary" : "w-1.5 bg-border"}`} />)}
       </div>
     </section>
   );
@@ -313,7 +297,7 @@ function Contact() {
   return (
     <section id="iletisim" className="mx-auto max-w-7xl scroll-mt-24 px-5 pb-28 lg:px-10">
       <div className="grid gap-6 lg:grid-cols-3">
-        <div className="rounded-2xl border bg-card p-8 shadow-soft lg:col-span-2">
+        <div className="py-8 lg:col-span-2">
           <p className="eyebrow">İletişim</p>
           <h2 className="mt-4 text-5xl">Sizi Ağırlamak İçin Sabırsızlanıyoruz.</h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2">
@@ -321,13 +305,13 @@ function Contact() {
             <div className="flex gap-3"><Clock className="h-5 w-5 text-accent" /><div><p className="font-medium">Çalışma Saatleri</p><p className="text-sm text-muted-foreground">Pzt – Cmt · 09:30 – 19:30<br />Pazar · Kapalı</p></div></div>
           </div>
           <div className="mt-10 flex flex-wrap gap-3">
-            <a href="https://wa.me/905000000000" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground"><Phone className="h-4 w-4" /> WhatsApp ile Yazın</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Hairport+Coiffure+Atatürk+Blv+97B+Atakent+Samsun" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground"><MapPin className="h-4 w-4" /> Yol Tarifi Al</a>
             <a href="https://instagram.com/pinaroztunc_" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm"><Instagram className="h-4 w-4" /> @pinaroztunc_</a>
           </div>
         </div>
         <div className="flex flex-col justify-between rounded-2xl bg-primary p-8 text-primary-foreground">
           <p className="font-serif text-4xl leading-tight">Yeni bir siz için ilk adım.</p>
-          <button onClick={() => openBooking()} className="mt-8 rounded-full bg-accent py-4 text-xs uppercase tracking-[0.2em] text-accent-foreground">Hemen Randevu Al</button>
+          <Button variant="editorial" size="auto" onClick={() => openBooking()} className="mt-8 rounded-full bg-accent py-4 text-xs uppercase tracking-[0.2em] text-accent-foreground">Hemen Randevu Al</Button>
         </div>
       </div>
     </section>

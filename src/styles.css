@@ -34,9 +34,12 @@
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-info: var(--info);
+  --color-hero-foreground: var(--hero-foreground);
 }
 
 :root {
+  --hero-foreground: #ffffff;
+  --hero-shade: linear-gradient(90deg, rgb(35 27 23 / 72%), rgb(35 27 23 / 10%));
   --radius: 0.75rem;
   --background: #f5f1eb;
   --foreground: #55443b;
@@ -73,7 +76,7 @@
 @utility eyebrow {
   font-family: var(--font-sans);
   font-size: 0.68rem;
-  letter-spacing: 0.32em;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--muted-foreground);
 }
@@ -95,5 +98,17 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.01em; }
+  h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 400; letter-spacing: 0; }
+}
+
+.salon-hero { height: min(780px, calc(100svh - 70px)); min-height: 610px; }
+.hero-shade { background: var(--hero-shade); }
+[id] { scroll-margin-top: 100px; }
+@media (max-width: 639px) {
+  .salon-hero { height: calc(100svh - 76px); min-height: 570px; }
+  .hero-shade { background: linear-gradient(0deg, rgb(35 27 23 / 85%), rgb(35 27 23 / 12%) 100%); }
+  section:not(.salon-hero) { padding-top: 64px; padding-bottom: 64px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
