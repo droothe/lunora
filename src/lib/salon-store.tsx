@@ -3,6 +3,7 @@ import hero from "@/assets/hero.jpg";
 import blonde from "@/assets/blonde.jpg";
 import bride from "@/assets/bride.jpg";
 import salon from "@/assets/salon.jpg";
+import { ANY_SPECIALIST, availableSpecialists, dateKey, isSlotAvailable, validCustomer } from "./booking-rules";
 
 export const CATEGORIES = [
   "Tüm Hizmetler",
@@ -66,7 +67,7 @@ const today = new Date();
 const iso = (offset: number) => {
   const d = new Date(today);
   d.setDate(d.getDate() + offset);
-  return d.toISOString().slice(0, 10);
+  return dateKey(d);
 };
 
 const initialAppointments: Appointment[] = [
@@ -84,7 +85,7 @@ type Ctx = {
   services: Service[];
   updateService: (id: string, patch: Partial<Service>) => void;
   appointments: Appointment[];
-  addAppointment: (a: Omit<Appointment, "id" | "ref" | "status">) => Appointment;
+  addAppointment: (a: Omit<Appointment, "id" | "ref" | "status">) => Appointment | null;
   setStatus: (id: string, s: Status) => void;
   booking: { open: boolean; preset: BookingPreset; key: number };
   openBooking: (preset?: BookingPreset) => void;
@@ -99,14 +100,25 @@ export function SalonProvider({ children }: { children: ReactNode }) {
   const [booking, setBooking] = useState({ open: false, preset: {} as BookingPreset, key: 0 });
 
   const updateService = useCallback((id: string, patch: Partial<Service>) => {
+    if (patch.price !== undefined && (!Number.isFinite(patch.price) || patch.price < 0)) return;
+    if (patch.duration !== undefined && (!Number.isFinite(patch.duration) || patch.duration <= 0)) return;
     setServices((s) => s.map((x) => (x.id === id ? { ...x, ...patch } : x)));
   }, []);
 
   const addAppointment: Ctx["addAppointment"] = (a) => {
+    const chosen = services.filter((s) => a.serviceIds.includes(s.id));
+    const duration = chosen.reduce((sum, s) => sum + s.duration, 0);
+    const total = chosen.reduce((sum, s) => sum + s.price, 0);
+    if (!chosen.length || !validCustomer(a.customer, a.phone, a.email) || !isSlotAvailable(a.date, a.time, duration, a.specialist, appointments)) return null;
+    const specialist = a.specialist === ANY_SPECIALIST ? availableSpecialists(a.date, a.time, duration, appointments)[0] : a.specialist;
+    if (!specialist) return null;
+    let ref = "";
+    do { ref = "HP-" + Math.floor(10000 + Math.random() * 90000); } while (appointments.some((x) => x.ref === ref));
     const appt: Appointment = {
       ...a,
+      customer: a.customer.trim(), phone: a.phone.trim(), email: a.email.trim(), specialist, duration, total,
       id: crypto.randomUUID(),
-      ref: "HP-" + Math.floor(10000 + Math.random() * 89999),
+      ref,
       status: "Bekliyor",
     };
     setAppointments((list) => [appt, ...list]);
