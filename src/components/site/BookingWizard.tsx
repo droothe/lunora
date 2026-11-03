@@ -152,7 +152,7 @@ function Wizard({ onClose }: { onClose: () => void }) {
                   <div className="space-y-3">
                     {([["name", "Ad Soyad"], ["phone", "Telefon"], ["email", "E-posta"]] as const).map(([k, l]) => (
                       <label key={k} className="block text-xs text-muted-foreground">{l}<input aria-label={l} type={k === "email" ? "email" : k === "phone" ? "tel" : "text"} autoComplete={k === "name" ? "name" : k === "phone" ? "tel" : "email"} placeholder={k === "phone" ? "05xx xxx xx xx" : l} value={info[k]} onChange={(e) => setInfo({ ...info, [k]: e.target.value })}
-                        className="w-full rounded-xl border bg-background px-4 py-3 text-sm outline-none transition focus:border-accent" />
+                        className="mt-1 w-full rounded-xl border bg-background px-4 py-3 text-sm outline-none transition focus:border-accent" /></label>
                     ))}
                     <textarea aria-label="Notlar" placeholder="Notlar" rows={3} value={info.notes} onChange={(e) => setInfo({ ...info, notes: e.target.value })}
                       className="w-full rounded-xl border bg-background px-4 py-3 text-sm outline-none focus:border-accent" />
