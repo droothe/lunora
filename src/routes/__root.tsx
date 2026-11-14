@@ -82,8 +82,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "HAIRPORT Coiffure by Pınar Öztunç" },
-      { name: "description", content: "Atakent, Atakum / Samsun — Master of Balyage." },
+      { title: "Lunora Atelier — Örnek Saç Tasarım Stüdyosu" },
+      { name: "description", content: "Saç tasarımı ve güzellik hizmetleri için hazırlanmış örnek salon sitesi." },
     ],
     links: [
       {

@@ -1,10 +1,10 @@
-# HAIRPORT Luxury Salon
+# Lunora Atelier — Örnek Salon Sitesi
 
 You are a world-class UI/UX Designer and Lead Frontend Engineer specializing in high-fashion, ultra-luxury editorial websites and prestige booking platforms. Your design standards rival those of top-tier global luxury brands (Vogue, Chanel, Cartier).
 
 
 
-Create an exceptionally high-end, luxury editorial Landing Page and Interactive Salon Management System for "HAIRPORT Coiffure by Pınar Öztunç", a premier hair and beauty salon located in Atakent, Atakum / Samsun, Türkiye.
+This project is a frontend-only salon website and interactive management demo for the fictional brand "Lunora Atelier". Brand, staff, customer, location, and contact details are examples, not real business information.
 
 
 
@@ -56,7 +56,7 @@ Visual Attributes:
 
 Prominently position the following core salon attributes:
 
-- Location: "Atakent, Atakum / Samsun"
+- Location: "Örnekşehir" (placeholder)
 
 - Specializations: "Master of Balyage & Blonde Specialist", "Natural & Blonde, Cut & Extension Expert"
 
@@ -74,7 +74,7 @@ Prominently position the following core salon attributes:
 
 #### A. Sticky Luxury Header
 
-- Brand logo: "HAIRPORT Coiffure by Pınar Öztunç".
+- Brand logo: "Lunora Atelier".
 
 - Nav links: Ana Sayfa, Hizmetler, Uzmanlıklarımız, Galeri, Hakkımızda, İletişim.
 
@@ -92,7 +92,7 @@ Prominently position the following core salon attributes:
 
 - Headline: "Güzelliğinizi Sanata Dönüştürüyoruz."
 
-- Subheadline: "Samsun Atakum'un seçkin salonunda kişiye özel balyaj, doğal sarı tonlar, profesyonel kesim ve ayrıcalıklı güzellik deneyimi."
+- Subheadline: Example copy for personalized hair design and beauty services.
 
 - Dual CTAs: "Hemen Randevu Al" & "Hizmetlerimizi Keşfedin".
 
@@ -108,7 +108,7 @@ Floating horizontal bar styled with #EAE2D8 background:
 
 - 🧕 Özel Tesettür Bölümümüz Mevcuttur
 
-- 📍 Atakent, Atakum Konumu
+- 📍 Örnekşehir Konumu
 
 
 
@@ -150,11 +150,11 @@ A standalone luxury section highlighting privacy and comfort:
 
 #### G. About, Reviews & Contact
 
-- Pınar Öztunç profile & salon hygiene standards.
+- Fictional salon profile and example salon information.
 
 - Client reviews slider.
 
-- Contact card with full address ("Atatürk Blv. 97B, Atakent, Samsun"), working hours, and direct WhatsApp button.
+- Contact card with placeholder address, phone, email, and working hours.
 
 
 
@@ -168,7 +168,7 @@ Implement using React state (no real backend required):
 
 - Step 1: Select Services (Multi-selection with dynamic live duration and price calculation).
 
-- Step 2: Select Specialist ("Pınar Öztunç - Master Colorist", "Senior Hair Stylist", "Makeup Artist", "Fark Etmez").
+- Step 2: Select Specialist ("Baş Renk Uzmanı", "Kıdemli Saç Tasarımcısı", "Makyaj Uzmanı", "Fark Etmez").
 
 - Step 3: Date & Time Picker (Interactive slot picker + Checkbox: "Özel Tesettür Bölümü Tercih Ediyorum").
 
@@ -182,7 +182,7 @@ Implement using React state (no real backend required):
 
 ### 5. INTERACTIVE ADMIN DASHBOARD (/admin)
 
-Access via demo route `/admin` (Demo Login Credentials shown on screen: admin@hairport.demo / 123456).
+Access via demo route `/admin` (Demo Login Credentials shown on screen: admin@lunora.example / 123456).
 
 Dashboard Theme matches the brand system using #F5F1EB workspace and #55443B dark mocha accents.
 

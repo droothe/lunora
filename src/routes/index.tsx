@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X, MapPin, Clock, Phone, ArrowRight, Star, ShieldCheck, ChevronLeft, ChevronRight, Instagram } from "lucide-react";
+import { Menu, X, MapPin, Clock, Phone, Mail, ArrowRight, Star, ShieldCheck, ChevronLeft, ChevronRight, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SalonModal } from "@/components/site/SalonModal";
 import { useSalon, CATEGORIES, GALLERY, IMAGES, tl } from "@/lib/salon-store";
@@ -8,10 +8,10 @@ import { useSalon, CATEGORIES, GALLERY, IMAGES, tl } from "@/lib/salon-store";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "HAIRPORT Coiffure by Pınar Öztunç — Atakum, Samsun" },
-      { name: "description", content: "Samsun Atakum'da balyaj, doğal sarı tonlar, kesim, kaynak ve özel tesettür bölümü ile ayrıcalıklı güzellik deneyimi." },
-      { property: "og:title", content: "HAIRPORT Coiffure by Pınar Öztunç" },
-      { property: "og:description", content: "Master of Balyage · Atakent, Atakum / Samsun" },
+      { title: "Lunora Atelier — Örnek Saç Tasarım Stüdyosu" },
+      { name: "description", content: "Lunora Atelier, saç tasarımı ve güzellik hizmetleri için hazırlanmış örnek bir salon sitesidir." },
+      { property: "og:title", content: "Lunora Atelier" },
+      { property: "og:description", content: "Örnek saç tasarımı ve güzellik stüdyosu." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -45,8 +45,8 @@ function Index() {
 function Logo() {
   return (
     <a href="#top" className="leading-none">
-      <span className="block font-serif text-2xl tracking-[0.25em]">HAIRPORT</span>
-      <span className="block text-[9px] uppercase tracking-[0.3em] text-muted-foreground">Coiffure by Pınar Öztunç</span>
+      <span className="block font-serif text-2xl tracking-[0.25em]">LUNORA</span>
+      <span className="block text-[9px] uppercase tracking-[0.3em] text-muted-foreground">Hair Atelier</span>
     </a>
   );
 }
@@ -90,14 +90,14 @@ function Hero() {
   const { openBooking } = useSalon();
   return (
     <section className="salon-hero relative isolate overflow-hidden">
-      <img src={GALLERY[4]?.src ?? IMAGES.hero} alt="HAIRPORT saç renklendirme çalışması" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" fetchPriority="high" />
+      <img src={IMAGES.hero} alt="Lunora Atelier saç renklendirme çalışması" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" fetchPriority="high" />
       <div className="hero-shade absolute inset-0 -z-10" />
       <div className="mx-auto flex h-full max-w-7xl items-end px-5 pb-10 pt-28 lg:px-10 lg:pb-14">
         <div className="fade-up max-w-2xl text-hero-foreground">
-          <p className="mb-5 flex items-center gap-2 text-xs uppercase"><MapPin className="h-3 w-3" /> Atakent, Atakum — Samsun</p>
-          <h1 className="text-5xl leading-none sm:text-7xl lg:text-8xl">HAIRPORT <span className="mt-2 block text-3xl italic sm:text-4xl">Coiffure by Pınar Öztunç</span></h1>
+          <p className="mb-5 flex items-center gap-2 text-xs uppercase"><MapPin className="h-3 w-3" /> Örnekşehir</p>
+          <h1 className="text-5xl leading-none sm:text-7xl lg:text-8xl">LUNORA <span className="mt-2 block text-3xl italic sm:text-4xl">Hair Atelier</span></h1>
           <p className="mt-5 font-serif text-2xl sm:text-3xl">Güzelliğinizi <em>Sanata</em> Dönüştürüyoruz.</p>
-          <p className="mt-4 max-w-lg text-sm leading-relaxed text-hero-foreground/90">Samsun Atakum'un seçkin salonunda kişiye özel balyaj, doğal sarı tonlar, profesyonel kesim ve ayrıcalıklı güzellik deneyimi.</p>
+          <p className="mt-4 max-w-lg text-sm leading-relaxed text-hero-foreground/90">Saç tasarımı, doğal renk geçişleri ve kişiye özel güzellik deneyimi için hazırlanmış örnek salon.</p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Button variant="editorial" size="auto" onClick={() => openBooking()} className="group rounded-full bg-accent px-6 py-3 text-xs uppercase text-accent-foreground">Hemen Randevu Al <ArrowRight className="transition group-hover:translate-x-1" /></Button>
             <Button asChild variant="editorial" size="auto" className="rounded-full border border-hero-foreground/50 px-6 py-3 text-xs text-hero-foreground"><a href="#hizmetler">Hizmetlerimizi Keşfedin</a></Button>
@@ -109,7 +109,7 @@ function Hero() {
 }
 
 function Badges() {
-  const items = ["👑 Master of Balyage & Ombre", "✂️ Cut & Extension Expert", "🧕 Özel Tesettür Bölümümüz Mevcuttur", "📍 Atakent, Atakum Konumu"];
+  const items = ["👑 Renk Tasarımı Uzmanı", "✂️ Kesim & Şekillendirme", "🧕 Özel Bölüm Seçeneği", "📍 Örnekşehir Konumu"];
   return (
     <div className="mx-auto max-w-7xl px-5 lg:px-10">
       <div className="grid gap-px overflow-hidden rounded-2xl border bg-border shadow-soft sm:grid-cols-2 lg:grid-cols-4">
@@ -249,18 +249,18 @@ function About() {
   return (
     <section id="hakkimizda" className="scroll-mt-24 bg-secondary py-28">
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-2 lg:px-10">
-        <img src={IMAGES.salon} alt="HAIRPORT salon" loading="lazy" className="aspect-[4/3] w-full rounded-[2rem] object-cover shadow-lift" />
+        <img src={IMAGES.salon} alt="Lunora Atelier salonu" loading="lazy" className="aspect-[4/3] w-full rounded-[2rem] object-cover shadow-lift" />
         <div>
           <p className="eyebrow">Hakkımızda</p>
-          <h2 className="mt-4 text-5xl leading-tight">Pınar Öztunç</h2>
-          <p className="mt-1 font-serif text-xl italic text-muted-foreground">Kurucu · Master Colorist · Makyaj Sanatçısı</p>
-          <p className="mt-6 text-muted-foreground">HAIRPORT Coiffure, saçı bir sanat eseri gibi ele alan bir anlayışla Atakent'te kuruldu. Pınar Öztunç ve ekibi; balyaj, doğal sarı tonlar, kesim ve kaynak alanlarında kişiye özel, uzun ömürlü sonuçlar tasarlar.</p>
+          <h2 className="mt-4 text-5xl leading-tight">Lunora Atelier</h2>
+          <p className="mt-1 font-serif text-xl italic text-muted-foreground">Örnek Saç Tasarım Stüdyosu</p>
+          <p className="mt-6 text-muted-foreground">Lunora Atelier, saçı bir sanat eseri gibi ele alan örnek bir salon markasıdır. Ekibimiz; renk tasarımı, kesim ve bakım alanlarında kişiye özel sonuçlar sunmayı hedefler.</p>
           <div className="mt-8 grid grid-cols-3 gap-4 border-t pt-8">
-            {[["348+", "Paylaşılan dönüşüm"], ["5K+", "Mutlu takipçi"], ["%100", "Hijyen protokolü"]].map(([n, l]) => (
+            {[["8+", "Örnek hizmet"], ["Demo", "Örnek içerik"], ["%100", "Kurgusal marka"]].map(([n, l]) => (
               <div key={l}><p className="font-serif text-4xl">{n}</p><p className="text-xs text-muted-foreground">{l}</p></div>
             ))}
           </div>
-          <p className="mt-8 text-sm text-muted-foreground">Tüm aletler her müşteri sonrası sterilize edilir; tek kullanımlık havlu ve önlükler, profesyonel ürün serileri kullanılır.</p>
+          <p className="mt-8 text-sm text-muted-foreground">Bu sayfadaki salon, hizmet ve iletişim bilgileri örnek amaçlıdır.</p>
         </div>
       </div>
     </section>
@@ -269,10 +269,10 @@ function About() {
 
 function Reviews() {
   const reviews = [
-    ["Elif Y.", "Hayalimdeki balyajı ilk seferde yakaladık. Pınar Hanım'ın renk anlayışı gerçekten bambaşka."],
-    ["Zeynep K.", "Tesettür bölümü sayesinde kendimi çok rahat hissettim. Huzurlu ve özenli bir deneyim."],
-    ["Merve D.", "Düğünümde saç ve makyajım kusursuzdu, gece boyunca hiç bozulmadı."],
-    ["Selin A.", "Sarıya geçişte saçımın sağlığı hiç bozulmadı, parlaklığı inanılmaz."],
+    ["Örnek Müşteri", "Kişiye özel saç tasarımı ve özenli bir deneyim."],
+    ["Örnek Müşteri", "Özel bölüm seçeneği sayesinde rahat bir ziyaret."],
+    ["Örnek Müşteri", "Özel gün saç ve makyajı için örnek değerlendirme."],
+    ["Örnek Müşteri", "Doğal renk geçişleri ve parlak bir görünüm."],
   ];
   const [i, setI] = useState(0);
   useEffect(() => {
@@ -281,7 +281,7 @@ function Reviews() {
   }, [reviews.length]);
   return (
     <section className="mx-auto max-w-4xl px-5 py-28 text-center">
-      <p className="eyebrow">Müşteri Yorumları</p>
+      <p className="eyebrow">Örnek Müşteri Yorumları</p>
       <div className="mt-6 flex justify-center gap-1 text-accent">{Array.from({ length: 5 }).map((_, k) => <Star key={k} className="h-4 w-4 fill-current" />)}</div>
       <blockquote key={i} className="fade-up mt-8 font-serif text-3xl leading-snug sm:text-4xl">“{reviews[i]?.[1]}”</blockquote>
       <p className="mt-6 text-xs uppercase tracking-[0.25em] text-muted-foreground">{reviews[i]?.[0]}</p>
@@ -301,12 +301,14 @@ function Contact() {
           <p className="eyebrow">İletişim</p>
           <h2 className="mt-4 text-5xl">Sizi Ağırlamak İçin Sabırsızlanıyoruz.</h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2">
-            <div className="flex gap-3"><MapPin className="h-5 w-5 text-accent" /><div><p className="font-medium">Adres</p><p className="text-sm text-muted-foreground">Atatürk Blv. 97B, Atakent,<br />Atakum / Samsun</p></div></div>
-            <div className="flex gap-3"><Clock className="h-5 w-5 text-accent" /><div><p className="font-medium">Çalışma Saatleri</p><p className="text-sm text-muted-foreground">Pzt – Cmt · 09:30 – 19:30<br />Pazar · Kapalı</p></div></div>
+            <div className="flex gap-3"><MapPin className="h-5 w-5 text-accent" /><div><p className="font-medium">Örnek Adres</p><p className="text-sm text-muted-foreground">Örnek Mahallesi, Örnek Sokak No: 00,<br />Örnekşehir</p></div></div>
+            <div className="flex gap-3"><Clock className="h-5 w-5 text-accent" /><div><p className="font-medium">Örnek Çalışma Saatleri</p><p className="text-sm text-muted-foreground">Pzt – Cmt · 10:00 – 18:00<br />Pazar · Kapalı</p></div></div>
+            <div className="flex gap-3"><Phone className="h-5 w-5 text-accent" /><div><p className="font-medium">Örnek Telefon</p><p className="text-sm text-muted-foreground">+90 (5xx) xxx xx xx</p></div></div>
+            <div className="flex gap-3"><Mail className="h-5 w-5 text-accent" /><div><p className="font-medium">Örnek E-posta</p><p className="text-sm text-muted-foreground">merhaba@example.com</p></div></div>
           </div>
           <div className="mt-10 flex flex-wrap gap-3">
-            <a href="https://www.google.com/maps/search/?api=1&query=Hairport+Coiffure+Atatürk+Blv+97B+Atakent+Samsun" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground"><MapPin className="h-4 w-4" /> Yol Tarifi Al</a>
-            <a href="https://instagram.com/pinaroztunc_" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm"><Instagram className="h-4 w-4" /> @pinaroztunc_</a>
+            <a href="mailto:merhaba@example.com" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground"><Mail className="h-4 w-4" /> Örnek E-posta</a>
+            <a href="https://example.com" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm"><Instagram className="h-4 w-4" /> Örnek Sosyal Medya</a>
           </div>
         </div>
         <div className="flex flex-col justify-between rounded-2xl bg-primary p-8 text-primary-foreground">
@@ -323,7 +325,7 @@ function Footer() {
     <footer className="border-t py-10">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 text-xs text-muted-foreground sm:flex-row lg:px-10">
         <Logo />
-        <p>© {new Date().getFullYear()} HAIRPORT Coiffure · Atakent, Atakum / Samsun</p>
+        <p>© {new Date().getFullYear()} Lunora Atelier · Örnekşehir · Örnek site</p>
         <Link to="/admin" className="hover:text-foreground">Yönetim Paneli</Link>
       </div>
     </footer>

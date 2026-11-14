@@ -9,9 +9,9 @@ import { useSalon, TIME_SLOTS, tl, type Status, type Appointment } from "@/lib/s
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: "Yönetim Paneli — HAIRPORT Coiffure" },
-      { name: "description", content: "HAIRPORT Coiffure randevu, hizmet ve müşteri yönetim paneli (demo)." },
-      { property: "og:title", content: "Yönetim Paneli — HAIRPORT Coiffure" },
+      { title: "Yönetim Paneli — Lunora Atelier" },
+      { name: "description", content: "Lunora Atelier randevu, hizmet ve müşteri yönetim paneli (demo)." },
+      { property: "og:title", content: "Yönetim Paneli — Lunora Atelier" },
       { property: "og:description", content: "Randevu ve müşteri yönetimi demo paneli." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -34,14 +34,14 @@ function Admin() {
 }
 
 function Login({ onOk }: { onOk: () => void }) {
-  const [email, setEmail] = useState("admin@hairport.demo");
+  const [email, setEmail] = useState("admin@lunora.example");
   const [pw, setPw] = useState("123456");
   const [err, setErr] = useState("");
   return (
     <div className="grid min-h-screen place-items-center px-5">
-      <form onSubmit={(e) => { e.preventDefault(); if (email === "admin@hairport.demo" && pw === "123456") onOk(); else setErr("Bilgiler hatalı."); }}
+      <form onSubmit={(e) => { e.preventDefault(); if (email === "admin@lunora.example" && pw === "123456") onOk(); else setErr("Bilgiler hatalı."); }}
         className="fade-up w-full max-w-sm rounded-3xl border bg-card p-8 shadow-lift">
-        <p className="font-serif text-3xl tracking-[0.25em]">HAIRPORT</p>
+        <p className="font-serif text-3xl tracking-[0.25em]">LUNORA</p>
         <p className="eyebrow mt-1">Yönetim Paneli</p>
         <div className="mt-8 space-y-3">
           <input aria-label="E-posta" type="email" autoComplete="username" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-xl border bg-background px-4 py-3 text-sm outline-none focus:border-accent" placeholder="E-posta" />
@@ -51,7 +51,7 @@ function Login({ onOk }: { onOk: () => void }) {
         <Button variant="editorial" size="auto" className="mt-6 w-full rounded-full bg-primary py-3 text-sm text-primary-foreground">Giriş Yap</Button>
         <div className="mt-6 rounded-xl bg-secondary p-4 text-xs text-muted-foreground">
           <p className="font-medium text-foreground">Demo Giriş Bilgileri</p>
-          <p>admin@hairport.demo / 123456</p>
+          <p>admin@lunora.example / 123456</p>
         </div>
         <Link to="/" className="mt-6 flex items-center gap-1 text-xs text-muted-foreground"><ArrowLeft className="h-3 w-3" /> Siteye dön</Link>
       </form>
@@ -72,7 +72,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
     <div className="min-h-screen lg:flex">
       <aside className="flex items-center justify-between bg-primary px-5 py-4 text-primary-foreground lg:sticky lg:top-0 lg:h-screen lg:w-64 lg:flex-col lg:items-stretch lg:justify-start lg:p-8">
         <div>
-          <p className="font-serif text-2xl tracking-[0.25em]">HAIRPORT</p>
+          <p className="font-serif text-2xl tracking-[0.25em]">LUNORA</p>
           <p className="text-[9px] uppercase tracking-[0.3em] opacity-60">Admin</p>
         </div>
         <nav className="mt-10 hidden flex-col gap-1 lg:flex">
@@ -121,7 +121,7 @@ function Overview() {
   const name = (ids: string[]) => ids.map((i) => services.find((s) => s.id === i)?.name).join(", ");
   return (
     <>
-      <Title s="Genel Bakış" t="Günaydın, Pınar." />
+      <Title s="Genel Bakış" t="Günaydın, Yönetici." />
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         {metrics.map(([l, v]) => (
           <div key={l as string} className="rounded-2xl border bg-card p-5 shadow-soft">

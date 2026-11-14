@@ -44,9 +44,9 @@ export type Appointment = {
 };
 
 export const SPECIALISTS = [
-  "Pınar Öztunç - Master Colorist",
-  "Senior Hair Stylist",
-  "Makeup Artist",
+  "Baş Renk Uzmanı",
+  "Kıdemli Saç Tasarımcısı",
+  "Makyaj Uzmanı",
   "Fark Etmez",
 ];
 
@@ -71,12 +71,12 @@ const iso = (offset: number) => {
 };
 
 const initialAppointments: Appointment[] = [
-  { id: "a1", ref: "HP-48213", customer: "Elif Yılmaz", phone: "0532 111 22 33", email: "elif@mail.com", notes: "Soğuk tonları seviyor.", serviceIds: ["s1"], specialist: "Pınar Öztunç - Master Colorist", date: iso(0), time: "10:30", privateSection: false, status: "Onaylandı", total: 4500, duration: 180 },
-  { id: "a2", ref: "HP-48214", customer: "Zeynep Kaya", phone: "0533 222 33 44", email: "zeynep@mail.com", notes: "", serviceIds: ["s6"], specialist: "Senior Hair Stylist", date: iso(0), time: "14:30", privateSection: true, status: "Bekliyor", total: 3500, duration: 150 },
-  { id: "a3", ref: "HP-48215", customer: "Merve Demir", phone: "0535 333 44 55", email: "merve@mail.com", notes: "Haziran düğünü.", serviceIds: ["s7"], specialist: "Pınar Öztunç - Master Colorist", date: iso(1), time: "09:30", privateSection: false, status: "Bekliyor", total: 15000, duration: 300 },
-  { id: "a4", ref: "HP-48216", customer: "Ayşe Çelik", phone: "0536 444 55 66", email: "ayse@mail.com", notes: "", serviceIds: ["s4", "s3"], specialist: "Senior Hair Stylist", date: iso(2), time: "16:30", privateSection: true, status: "Onaylandı", total: 3000, duration: 150 },
-  { id: "a5", ref: "HP-48217", customer: "Elif Yılmaz", phone: "0532 111 22 33", email: "elif@mail.com", notes: "", serviceIds: ["s6"], specialist: "Pınar Öztunç - Master Colorist", date: iso(-6), time: "11:30", privateSection: false, status: "Tamamlandı", total: 3500, duration: 150 },
-  { id: "a6", ref: "HP-48218", customer: "Selin Arslan", phone: "0537 555 66 77", email: "selin@mail.com", notes: "", serviceIds: ["s2"], specialist: "Pınar Öztunç - Master Colorist", date: iso(-3), time: "12:30", privateSection: false, status: "Tamamlandı", total: 6500, duration: 240 },
+  { id: "a1", ref: "DEMO-48213", customer: "Örnek Müşteri 1", phone: "05XX XXX XX XX", email: "musteri1@example.com", notes: "Soğuk tonları seviyor.", serviceIds: ["s1"], specialist: "Baş Renk Uzmanı", date: iso(0), time: "10:30", privateSection: false, status: "Onaylandı", total: 4500, duration: 180 },
+  { id: "a2", ref: "DEMO-48214", customer: "Örnek Müşteri 2", phone: "05XX XXX XX XX", email: "musteri2@example.com", notes: "", serviceIds: ["s6"], specialist: "Kıdemli Saç Tasarımcısı", date: iso(0), time: "14:30", privateSection: true, status: "Bekliyor", total: 3500, duration: 150 },
+  { id: "a3", ref: "DEMO-48215", customer: "Örnek Müşteri 3", phone: "05XX XXX XX XX", email: "musteri3@example.com", notes: "Özel gün hazırlığı.", serviceIds: ["s7"], specialist: "Baş Renk Uzmanı", date: iso(1), time: "09:30", privateSection: false, status: "Bekliyor", total: 15000, duration: 300 },
+  { id: "a4", ref: "DEMO-48216", customer: "Örnek Müşteri 4", phone: "05XX XXX XX XX", email: "musteri4@example.com", notes: "", serviceIds: ["s4", "s3"], specialist: "Kıdemli Saç Tasarımcısı", date: iso(2), time: "16:30", privateSection: true, status: "Onaylandı", total: 3000, duration: 150 },
+  { id: "a5", ref: "DEMO-48217", customer: "Örnek Müşteri 1", phone: "05XX XXX XX XX", email: "musteri1@example.com", notes: "", serviceIds: ["s6"], specialist: "Baş Renk Uzmanı", date: iso(-6), time: "11:30", privateSection: false, status: "Tamamlandı", total: 3500, duration: 150 },
+  { id: "a6", ref: "DEMO-48218", customer: "Örnek Müşteri 5", phone: "05XX XXX XX XX", email: "musteri5@example.com", notes: "", serviceIds: ["s2"], specialist: "Baş Renk Uzmanı", date: iso(-3), time: "12:30", privateSection: false, status: "Tamamlandı", total: 6500, duration: 240 },
 ];
 
 type BookingPreset = { serviceIds?: string[]; privateSection?: boolean };
@@ -113,7 +113,7 @@ export function SalonProvider({ children }: { children: ReactNode }) {
     const specialist = a.specialist === ANY_SPECIALIST ? availableSpecialists(a.date, a.time, duration, appointments)[0] : a.specialist;
     if (!specialist) return null;
     let ref = "";
-    do { ref = "HP-" + Math.floor(10000 + Math.random() * 90000); } while (appointments.some((x) => x.ref === ref));
+    do { ref = "LUN-" + Math.floor(10000 + Math.random() * 90000); } while (appointments.some((x) => x.ref === ref));
     const appt: Appointment = {
       ...a,
       customer: a.customer.trim(), phone: a.phone.trim(), email: a.email.trim(), specialist, duration, total,

@@ -1,7 +1,7 @@
 export const OPENING_MINUTES = 9 * 60 + 30;
 export const CLOSING_MINUTES = 19 * 60 + 30;
 export const ANY_SPECIALIST = "Fark Etmez";
-export const NAMED_SPECIALISTS = ["Pınar Öztunç - Master Colorist", "Senior Hair Stylist", "Makeup Artist"] as const;
+export const NAMED_SPECIALISTS = ["Baş Renk Uzmanı", "Kıdemli Saç Tasarımcısı", "Makyaj Uzmanı"] as const;
 
 export function dateKey(date: Date) {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;

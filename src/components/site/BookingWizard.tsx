@@ -50,11 +50,11 @@ function Wizard({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <SalonModal open onClose={onClose} title="HAIRPORT Online Randevu">
+    <SalonModal open onClose={onClose} title="Lunora Atelier Online Randevu">
         <div className="flex items-center justify-between border-b px-6 py-5">
           <div>
             <p className="eyebrow">Online Randevu</p>
-            <h3 className="text-2xl">HAIRPORT Coiffure</h3>
+            <h3 className="text-2xl">Lunora Atelier</h3>
           </div>
 
         </div>
@@ -63,7 +63,7 @@ function Wizard({ onClose }: { onClose: () => void }) {
           <div className="flex flex-col items-center overflow-y-auto px-6 py-10 text-center">
             <div className="mb-6 grid h-16 w-16 place-items-center rounded-full bg-accent/30"><Check className="h-7 w-7" /></div>
             <h3 className="text-4xl">Randevunuz Alındı</h3>
-            <p className="mt-3 max-w-sm text-sm text-muted-foreground">Randevu talebiniz bu oturumda oluşturuldu. HAIRPORT ile Instagram üzerinden iletişime geçebilirsiniz.</p>
+            <p className="mt-3 max-w-sm text-sm text-muted-foreground">Randevu talebiniz bu demo oturumunda oluşturuldu. Bu sitedeki marka ve iletişim bilgileri örnektir.</p>
             <div className="mt-8 w-full max-w-sm rounded-2xl border bg-background p-6 text-left text-sm">
               <p className="eyebrow">Referans Kodu</p>
               <p className="mb-4 font-serif text-3xl tracking-widest">{done.ref}</p>
